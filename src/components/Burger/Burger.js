@@ -3,11 +3,18 @@ import styles from './Burger.module.css';
 import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
 
 const burger = (props) => {
+    const transformedIngredients = Object.keys(props.ingrediens);
+    const items = [];
+    transformedIngredients.map(i => {
+        for (let n = 0; n < props.ingrediens[i]; n++) {
+            items.push(< BurgerIngredient type={i} key={i + n}></ BurgerIngredient>);
+        }
+    })
+
     return (
         <div className={styles.Burger}>
             <BurgerIngredient type='bread-top' key={2}></BurgerIngredient>
-            <BurgerIngredient type='cheese' key={4}></BurgerIngredient>
-            <BurgerIngredient type='meat' key={3}></BurgerIngredient>
+            {items.length > 0 ? items : (<p> Please start adding ingredient! </p>)}
             <BurgerIngredient type='bread-bottom' key={1}></BurgerIngredient>
         </div>
     );
