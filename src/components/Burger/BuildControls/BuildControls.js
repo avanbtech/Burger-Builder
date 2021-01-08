@@ -12,6 +12,9 @@ const items = [
 const buildControls = (props) => {
     return (
         <div className={styles.BuildControls}>
+            <p >
+                <strong>Total Price: ${props.price.toFixed(2)}</strong>
+            </p>
             {items.map(item =>
             (<BuildControl
                 label={item.label}
@@ -22,8 +25,12 @@ const buildControls = (props) => {
                 disabled={props.disabled}
             ></BuildControl>)
             )}
+            <button
+                className={styles.OrderButton}
+                disabled={props.purchasable}
+            >ORDER NOW</button>
         </div>
     );
 }
 
-export default buildControls;
+export default buildControls;  
