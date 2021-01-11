@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Burger from '../../components/Burger/Burger.js';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls.js';
+import Modal from '../../components/UI/Modal/Modal';
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary'
 
 const INGREDIENT_PRICES = {
     salad: 0.5,
@@ -17,11 +19,23 @@ class BurgerBuilder extends Component {
             meat: 0
         },
         totalPrice: 4,
-        purchasable: false
+        purchasable: false,
+        purchasing: false
+    }
+
+    updatePurchasingCancelation = () => {
+        this.setState({ purchasing: false });
+    }
+
+    perchaseContinueHandler = () => {
+        alert('You continue!');
+    }
+
+    updatePurchasingState = () => {
+        this.setState({ purchasing: true });
     }
 
     updatePurchaseState(ingredients) {
-        //const ingredients = { ...this.state.ingredients };
         const sum = Object.values(ingredients)
             .reduce(((sum, el) => {
                 return sum + el
@@ -64,8 +78,15 @@ class BurgerBuilder extends Component {
             disabledInfo[key] = disabledInfo[key] <= 0;
         }
 
+
         return (
             <React.Fragment>
+                <Modal show={this.state.purchasing} cancel={this.updatePurchasingCancelation}>
+                    <OrderSummary ingredients={this.state.ingredients}
+                        purchaseCanceled={this.updatePurchasingCancelation}
+                        purchaseContinued={this.perchaseContinueHandler}
+                        price={this.state.totalPrice} />
+                </Modal>
                 <div>Burger</div>
                 <div>Build Controls</div>
                 <Burger ingredients={this.state.ingredients}></Burger>
@@ -75,6 +96,7 @@ class BurgerBuilder extends Component {
                     disabled={disabledInfo}
                     price={this.state.totalPrice}
                     purchasable={!this.state.purchasable}
+                    ordered={this.updatePurchasingState}
                 >  </BuildControls>
             </React.Fragment>
         );
