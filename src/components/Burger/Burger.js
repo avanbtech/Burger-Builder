@@ -9,6 +9,7 @@ const burger = (props) => {
         for (let n = 0; n < props.ingredients[i]; n++) {
             items.push(< BurgerIngredient type={i} key={i + n}></ BurgerIngredient>);
         }
+        return items;
     });
 
     return (
