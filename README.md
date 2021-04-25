@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Page: [Sanswich Maker](sandwich-maker-ava.netlify.app)
+Page: [Sanswich Maker](https://sandwich-maker-ava.netlify.app)
 
 ## Available Scripts
 
